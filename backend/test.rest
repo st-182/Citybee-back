@@ -5,3 +5,8 @@ Content-Type: application/json
     "name": "Mazda 6",
     "hour_price": 3.25
 }
+
+###
+POST http://localhost:5000/vehicles
+Content-Type: application/json
+
