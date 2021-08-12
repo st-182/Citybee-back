@@ -1,0 +1,13 @@
+node_modules
+dist
+.cashe
+package-lock
+*.json
+
+.env
+.doc
+.docx
+.svg
+frontend/assets/new
+Project1.docx
+backend/package-lock.json
