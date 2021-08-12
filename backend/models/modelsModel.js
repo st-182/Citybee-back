@@ -16,3 +16,7 @@ const modelSchema = new Schema(
     timestamps: true,
   }
 );
+
+const Models = mongoose.model("model", modelSchema);
+
+export default Models;

@@ -1,0 +1,7 @@
+POST http://localhost:5000/models
+Content-Type: application/json
+
+{
+    "name": "Mazda 6",
+    "hour_price": 3.25
+}

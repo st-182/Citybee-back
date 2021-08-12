@@ -14,6 +14,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
 
+//importing all controllers
+import { getAllModels, postNewModel } from "./controllers/routesControllers.js";
+
 const app = express();
 dotenv.config();
 app.use(cors());
@@ -34,12 +37,7 @@ mongoose
   .catch((err) => console.log(err));
 
 //! GET
-app.get("/models", async (req, res) => {
-  try {
-  } catch (e) {
-    console.log(e);
-  }
-});
+app.get("/models", getAllModels);
 app.get("/modelscount", async (req, res) => {
   try {
   } catch (e) {
@@ -66,9 +64,4 @@ app.post("/vehicles", async (req, res) => {
     console.log(e);
   }
 });
-app.post("/models", async (req, res) => {
-  try {
-  } catch (e) {
-    console.log(e);
-  }
-});
+app.post("/models", postNewModel);
