@@ -28,11 +28,25 @@ const getAllModelsCount = async (req, res) => {
       .then((result) => allVehicles.push(...result))
       .catch((err) => console.log(err));
 
-    allModels.forEach((model) => {
-      model.count = 4;
-      //allVehicles.filter((item) => item.model_id.toString() == model._id.toString()).length;
-    });
-    res.json(allModels);
+    // allModels.forEach((model) => {
+    //   Object.assign(model, {
+    //     count: allVehicles.filter(
+    //       (item) => item.model_id.toString() == model._id.toString()
+    //     ).length,
+    //   });
+    //   console.log(model);
+    //   //allVehicles.filter((item) => item.model_id.toString() == model._id.toString()).length;
+    // });
+
+    const newAllModelsCount = allModels.map((model) => ({
+      _id: model._id,
+      name: model.name,
+      hour_price: model.hour_price,
+      count: allVehicles.filter(
+        (item) => item.model_id.toString() == model._id.toString()
+      ).length,
+    }));
+    res.json(newAllModelsCount);
 
     // await Vehicle.countDocuments({ model_id: "6114fd1542aef21804ff377c" })
     //   .then((result) => res.json(result))

@@ -10,3 +10,6 @@ Content-Type: application/json
 POST http://localhost:5000/vehicles
 Content-Type: application/json
 
+###
+GET http://localhost:5000/modelscount
+Content-Type: application/json
