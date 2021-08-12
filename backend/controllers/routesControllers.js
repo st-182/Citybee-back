@@ -1,12 +1,12 @@
 // Import of modules (schemas)
-import Models from "../models/modelsModel.js";
+import Model from "../models/modelsModel.js";
 import Vehicle from "../models/vehiclesModel.js";
 
 //! GET Routes
 // returns all models without PVM
 const getAllModels = (req, res) => {
   try {
-    Models.find()
+    Model.find()
       .then((result) => res.json(result))
       .catch((err) => console.log(err));
   } catch (e) {
@@ -15,22 +15,37 @@ const getAllModels = (req, res) => {
 };
 
 // -- single post page
-const getSinglePost = (req, res) => {
-  const id = req.params.id;
-  // let post = posts.find((post) => {
-  //   return post.id === id;
-  // });
-  // console.log(post);
-  // res.render("post", { title: post.title, post: post });
-  Post.findById(id)
-    .then((result) => res.render("post", { title: result.title, post: result }))
-    .catch((err) => console.log(err));
+const getAllModelsCount = async (req, res) => {
+  try {
+    //There are at least 2 ways of making ModelsCount route possible.
+    //1: Only 2 calls to server needed and all operations are done using the server
+    let allModels = [];
+    let allVehicles = [];
+    await Model.find()
+      .then((result) => allModels.push(...result))
+      .catch((err) => console.log(err));
+    await Vehicle.find()
+      .then((result) => allVehicles.push(...result))
+      .catch((err) => console.log(err));
+
+    allModels.forEach((model) => {
+      model.count = 4;
+      //allVehicles.filter((item) => item.model_id.toString() == model._id.toString()).length;
+    });
+    res.json(allModels);
+
+    // await Vehicle.countDocuments({ model_id: "6114fd1542aef21804ff377c" })
+    //   .then((result) => res.json(result))
+    //   .catch((err) => console.log(err));
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const postNewModel = (req, res) => {
   try {
     const receivedModelFromFrontend = req.body;
-    const newModel = new Models(receivedModelFromFrontend);
+    const newModel = new Model(receivedModelFromFrontend);
     newModel
       .save()
       .then((result) => res.json(result))
@@ -40,15 +55,16 @@ const postNewModel = (req, res) => {
   }
 };
 
-const deleteSinglePost = (req, res) => {
-  const id = req.params.id;
-  // let post = posts.find((post) => {
-  //   return post.id === id;
-  // });
-  // console.log(post);
-  // res.render("post", { title: post.title, post: post });
-  Post.findByIdAndDelete(id)
-    .then((result) => res.json({ message: "post deleted" }))
-    .catch((err) => console.log(err));
+const postNewVehicle = (req, res) => {
+  try {
+    const receivedVehicleFromFrontend = req.body;
+    const newVehicle = new Vehicle(receivedVehicleFromFrontend);
+    newVehicle
+      .save()
+      .then((result) => res.json(result))
+      .catch((err) => console.log(err));
+  } catch (e) {
+    console.log(e);
+  }
 };
-export { getAllModels, postNewModel };
+export { getAllModels, postNewModel, postNewVehicle, getAllModelsCount };

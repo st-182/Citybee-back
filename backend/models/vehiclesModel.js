@@ -6,6 +6,7 @@ const vehicleSchema = new Schema(
     model_id: {
       type: Schema.Types.ObjectId,
       ref: "models",
+      required: true,
     },
     number_plate: {
       type: String,
