@@ -44,6 +44,7 @@ mongoose
   .catch((err) => console.log(err));
 
 //! GET
+app.get("/", (req, res) => res.json(`API is running!...`));
 app.get("/models", getAllModels);
 app.get("/modelscount", getAllModelsCount);
 app.get("/vehicles", getAllVehicles);
