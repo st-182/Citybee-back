@@ -20,6 +20,8 @@ import {
   postNewModel,
   postNewVehicle,
   getAllModelsCount,
+  getAllVehicles,
+  getVehiclesByCountry,
 } from "./controllers/routesControllers.js";
 
 const app = express();
@@ -44,18 +46,8 @@ mongoose
 //! GET
 app.get("/models", getAllModels);
 app.get("/modelscount", getAllModelsCount);
-app.get("/vehicles", async (req, res) => {
-  try {
-  } catch (e) {
-    console.log(e);
-  }
-});
-app.get("/vehicles/:country", async (req, res) => {
-  try {
-  } catch (e) {
-    console.log(e);
-  }
-});
+app.get("/vehicles", getAllVehicles);
+app.get("/vehicles/:country", getVehiclesByCountry);
 
 //! POST
 app.post("/vehicles", postNewVehicle);
